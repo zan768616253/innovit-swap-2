@@ -1,0 +1,48 @@
+{
+    "name": "Innovit",
+    "logoURI": "https://raw.githubusercontent.com/compound-finance/token-list/master/assets/compound-interface.svg",
+    "keywords": [
+      "Innovit",
+      "defi"
+    ],
+    "timestamp": "2025-04-20T20:37:00.000+00:00",
+    "tokens": [
+      {
+        "chainId": 421614,
+        "address": "0xe61478F20950663b3973C9B34951FdcEd3e7ff0B",
+        "name": "Innovit Gold Token",
+        "symbol": "Gold",
+        "decimals": 18,
+        "logoURI": "https://raw.githubusercontent.com/compound-finance/token-list/master/assets/asset_ZRX.svg"
+      },
+      {
+        "chainId": 421614,
+        "address": "0x6806eE04460821eB7cCc19425F74548AE47a2d30",
+        "name": "Innovit Silver Token",
+        "symbol": "Silver",
+        "decimals": 18,
+        "logoURI": "https://raw.githubusercontent.com/compound-finance/token-list/master/assets/ctoken_usdc.svg"
+      },
+      {
+        "chainId": 421614,
+        "address": "0x2fb7a8dCFdb8A7B599A66920952A1b08bd4d45a7",
+        "name": "Innovit Copper Token",
+        "symbol": "Copper",
+        "decimals": 18,
+        "logoURI": "https://raw.githubusercontent.com/compound-finance/token-list/master/assets/ctoken_dai.svg"
+      },
+      {
+        "chainId": 421614,
+        "address": "0x200F2807E0EFC2E205f8c385ec045c25d1DdF792",
+        "name": "Innovit Iron Token",
+        "symbol": "Iron",
+        "decimals": 18,
+        "logoURI": "https://raw.githubusercontent.com/compound-finance/token-list/master/assets/asset_DAI.svg"
+      }
+    ],
+    "version": {
+      "major": 2,
+      "minor": 0,
+      "patch": 0
+    }
+  }
