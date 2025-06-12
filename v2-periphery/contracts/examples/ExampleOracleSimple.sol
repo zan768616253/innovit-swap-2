@@ -18,9 +18,9 @@ contract ExampleOracleSimple {
     address public immutable token0;
     address public immutable token1;
 
-    uint    public price0CumulativeLast;
-    uint    public price1CumulativeLast;
-    uint32  public blockTimestampLast;
+    uint public price0CumulativeLast;
+    uint public price1CumulativeLast;
+    uint32 public blockTimestampLast;
     FixedPoint.uq112x112 public price0Average;
     FixedPoint.uq112x112 public price1Average;
 
@@ -38,8 +38,8 @@ contract ExampleOracleSimple {
     }
 
     function update() external {
-        (uint price0Cumulative, uint price1Cumulative, uint32 blockTimestamp) =
-            UniswapV2OracleLibrary.currentCumulativePrices(address(pair));
+        (uint price0Cumulative, uint price1Cumulative, uint32 blockTimestamp) = UniswapV2OracleLibrary
+            .currentCumulativePrices(address(pair));
         uint32 timeElapsed = blockTimestamp - blockTimestampLast; // overflow is desired
 
         // ensure that at least one full period has passed since the last update

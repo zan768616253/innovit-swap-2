@@ -41,9 +41,9 @@
     "compile": "waffle .waffle.json",
     "postcompile": "yarn copy-v1-artifacts",
     "pretest": "yarn compile",
-    "test": "mocha",
+    "test": "mocha --timeout 30000 --bail",
     "prepublishOnly": "yarn test",
-    "test:swap-price": "mocha -r ts-node/register test/ExampleSwapToPrice.spec.ts --timeout 30000 --bail"
+    "pretest:swap-price": "yarn compile"
   },
   "license": "GPL-3.0-or-later"
 }

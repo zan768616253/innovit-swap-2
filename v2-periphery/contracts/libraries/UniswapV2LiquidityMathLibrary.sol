@@ -19,7 +19,7 @@ library UniswapV2LiquidityMathLibrary {
         uint256 truePriceTokenB,
         uint256 reserveA,
         uint256 reserveB
-    ) pure internal returns (bool aToB, uint256 amountIn) {
+    ) internal pure returns (bool aToB, uint256 amountIn) {
         aToB = FullMath.mulDiv(reserveA, truePriceTokenB, reserveB) < truePriceTokenA;
 
         uint256 invariant = reserveA.mul(reserveB);
@@ -46,14 +46,19 @@ library UniswapV2LiquidityMathLibrary {
         address tokenB,
         uint256 truePriceTokenA,
         uint256 truePriceTokenB
-    ) view internal returns (uint256 reserveA, uint256 reserveB) {
+    ) internal view returns (uint256 reserveA, uint256 reserveB) {
         // first get reserves before the swap
         (reserveA, reserveB) = UniswapV2Library.getReserves(factory, tokenA, tokenB);
 
         require(reserveA > 0 && reserveB > 0, 'UniswapV2ArbitrageLibrary: ZERO_PAIR_RESERVES');
 
         // then compute how much to swap to arb to the true price
-        (bool aToB, uint256 amountIn) = computeProfitMaximizingTrade(truePriceTokenA, truePriceTokenB, reserveA, reserveB);
+        (bool aToB, uint256 amountIn) = computeProfitMaximizingTrade(
+            truePriceTokenA,
+            truePriceTokenB,
+            reserveA,
+            reserveB
+        );
 
         if (amountIn == 0) {
             return (reserveA, reserveB);
@@ -120,10 +125,7 @@ library UniswapV2LiquidityMathLibrary {
         uint256 truePriceTokenA,
         uint256 truePriceTokenB,
         uint256 liquidityAmount
-    ) internal view returns (
-        uint256 tokenAAmount,
-        uint256 tokenBAmount
-    ) {
+    ) internal view returns (uint256 tokenAAmount, uint256 tokenBAmount) {
         bool feeOn = IUniswapV2Factory(factory).feeTo() != address(0);
         IUniswapV2Pair pair = IUniswapV2Pair(UniswapV2Library.pairFor(factory, tokenA, tokenB));
         uint kLast = feeOn ? pair.kLast() : 0;
@@ -132,7 +134,13 @@ library UniswapV2LiquidityMathLibrary {
         // this also checks that totalSupply > 0
         require(totalSupply >= liquidityAmount && liquidityAmount > 0, 'ComputeLiquidityValue: LIQUIDITY_AMOUNT');
 
-        (uint reservesA, uint reservesB) = getReservesAfterArbitrage(factory, tokenA, tokenB, truePriceTokenA, truePriceTokenB);
+        (uint reservesA, uint reservesB) = getReservesAfterArbitrage(
+            factory,
+            tokenA,
+            tokenB,
+            truePriceTokenA,
+            truePriceTokenB
+        );
 
         return computeLiquidityValue(reservesA, reservesB, totalSupply, liquidityAmount, feeOn, kLast);
     }
